@@ -1,5 +1,5 @@
-import categoryModel from "../Models/categoryModel.js";
-import NewsModel from "../Models/newsModel.js";
+import categoryModel from "../models/categoryModel.js";
+import NewsModel from "../models/newsModel.js";
 import ArticleModel from "../Models/articleModel.js";
 import UserModel from "../Models/userModel.js";
 import dotenv from "dotenv"
