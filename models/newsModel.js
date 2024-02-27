@@ -3,9 +3,9 @@ const {ObjectId}=mongoose.Schema;
 import {marked} from 'marked'
 // import slugify from "slugify";
 import speakingurl from 'speakingurl';
-import slugify from 'slug';
+// import slugify from 'slug';
 // import { slugify,slugifyUrl } from "transliteration";
-// import { slugify } from 'transliteration';
+import { slugify } from 'transliteration';
 
 const newsSchema=mongoose.Schema(
     {
