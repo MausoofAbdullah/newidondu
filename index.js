@@ -58,7 +58,7 @@ handlebars.registerHelper('isSecondImage', function(index, options) {
 // import dotenv from "dotenv";
 import cors from "cors" 
 // import AuthRoute from "./Routes/Auth.js"
-// import adminRoute from "./Routes/adminRoute.js"
+import adminRoute from "./Routes/adminRoute.js"
 import newsRoute from "./Routes/newsRoute.js"
 
 const app = express();
@@ -98,7 +98,7 @@ dotenv.config();
 app.get('/robots.txt', function(req, res) {
   res.sendFile(path.join(__dirname, 'robots.txt'));
 });
-//   app.use('/',adminRoute)
+  app.use('/',adminRoute)
   app.use('/',newsRoute)
   app.use((req, res, next) => {
     const error = new Error("Not found the page");

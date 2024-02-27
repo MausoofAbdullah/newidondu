@@ -1,8 +1,8 @@
-import categoryModel from "../Models/categoryModel.js";
-import NewsModel from "../Models/newsModel.js";
-import ArticleModel from "../Models/articleModel.js";
-import UserModel from "../Models/userModel.js";
-import adminModel from "../Models/adminModel.js";
+import categoryModel from "../models/categoryModel.js";
+import NewsModel from "../models/newsModel.js";
+import ArticleModel from "../models/articleModel.js";
+import UserModel from "../models/userModel.js";
+import adminModel from "../models/adminModel.js";
 import dotenv from "dotenv"
 import timeago from 'timeago.js';
 
