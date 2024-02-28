@@ -8,7 +8,7 @@ import path from "path"
 import hbs from "express-handlebars"
 import handlebars from "handlebars"
 import cookieParser from "cookie-parser";
-
+import sitemap from 'express-sitemap-xml'
 
 // import cheerio from "cheerio"
 // import prerender from "prerender-node"
