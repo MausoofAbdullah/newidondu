@@ -98,6 +98,9 @@ dotenv.config();
 app.get('/robots.txt', function(req, res) {
   res.sendFile(path.join(__dirname, 'robots.txt'));
 });
+app.get('/sitemap.xml', function(req, res) {
+  res.sendFile(path.join(__dirname, 'sitemap.xml'));
+});
   app.use('/',adminRoute)
   app.use('/',newsRoute)
   app.use((req, res, next) => {
