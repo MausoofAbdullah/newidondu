@@ -110,7 +110,7 @@ app.get('/sitemap.xml', function(req, res) {
   });
      // error handler middleware
      app.use((error, req, res, next) => {
-    res.render('user/error',{ message:error.message || 'Internal Server Error'})
+    res.render('user/error',{ message: 'Please try again or another method'})
     });
 
 
