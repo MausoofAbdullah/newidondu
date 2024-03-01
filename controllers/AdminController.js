@@ -288,7 +288,7 @@ export const updateNews=async(req,res,next)=>{
     })
 
     console.log(updatedNews,"updatednesd")
-    res.send('somethng')
+    res.redirect('/viewnewsList')
   } catch (error) {
     next(error)
     
