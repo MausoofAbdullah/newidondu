@@ -229,6 +229,71 @@ export const getCategory=async(req,res,next)=>{
 
 }
 
+
+export const viewNews=async(req,res,next)=>{
+  try {
+    const allnews=await NewsModel.find().sort({ createdAt: -1 }).exec()
+    const admins=req.user.email
+
+    res.render('admin/viewNews',{admin:true,allnews,admins})
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const editNews=async(req,res,next)=>{
+  try {
+
+    const id=req.params.id
+console.log(id,"id")
+    const news=await NewsModel.findOne({_id:id})
+    const category = await categoryModel.find().exec()
+   
+
+    res.render('admin/editNews',{news,admin:true,category})
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const updateNews=async(req,res,next)=>{
+  const id=req.params.id
+  console.log(req.body,"update")
+  const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph} = req.body;
+    
+    const dateString = date
+    
+  const dateObject = new Date(dateString);
+  const formattedDate = dateObject.toLocaleDateString();
+  const imageFiles = req.files;
+    console.log(imageFiles,'idm')
+
+
+  try {
+    const updatedNews=await NewsModel.updateOne({_id:id},{
+      $set:{
+        title,
+        subtitle,
+        category,
+        date:formattedDate,
+        body,
+        image1: imageFiles['image1']?.[0].filename, // Get the filename for image1
+        image2: imageFiles['image2']?.[0].filename, // Get the filename for image2
+        images: imageFiles['images']?.map(file => file.filename), 
+        imagetitle1,
+        imagetitle2,
+        secondparagraph,
+        thirdparagraph
+      }
+    })
+
+    console.log(updatedNews,"updatednesd")
+    res.send('somethng')
+  } catch (error) {
+    next(error)
+    
+  }
+}
  //logout functions
  export const adminLogout=async(req,res)=>{
   res.clearCookie('token')

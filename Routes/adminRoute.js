@@ -1,6 +1,6 @@
 import express from "express"
 import {addCategory, addNews, getCategory,adminRegister,adminLogin,
-  getAdmin,getadminLogin,adminLogout} from "../controllers/AdminController.js"
+  getAdmin,getadminLogin,adminLogout,viewNews,editNews,updateNews} from "../controllers/AdminController.js"
 
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v2 as cloudinary } from 'cloudinary';
@@ -63,6 +63,11 @@ router.post('/admin-addnews',authMiddleware,multipleupload,addNews)
 router.post('/categories',authMiddleware,addCategory)
 router.get('/categories',authMiddleware,getCategory)
 // router.get('/detailnews/:id',getDetailnews)
+
+
+router.get('/viewnewsList',authMiddleware,viewNews)
+router.get('/editNews/:id',authMiddleware,editNews)
+router.post('/updateNews/:id',authMiddleware,multipleupload,updateNews)
 
 router.post('/register',adminRegister)
 router.post('/login',adminLogin)
