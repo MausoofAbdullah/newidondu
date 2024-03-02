@@ -31,6 +31,7 @@ cloudinary.config({
 //   });
 
 const storage = new CloudinaryStorage({
+// const storage = ({
     cloudinary: cloudinary,
     params: {
       folder: 'news', // Set your desired folder in Cloudinary
