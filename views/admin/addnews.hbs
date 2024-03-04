@@ -4,6 +4,13 @@
   <label for="exampleFormControlInput1" class="form-label">Title</label>
   <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="title of the news">
 </div>
+<div class="mb-3 col-3">
+            <label for="breakingNews" class="form-label">Breakin News ?</label>
+              <select class="form-control" id="breakingNews" name="isBreaking">
+                <option value="false" >No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
  <div class="mb-3 col-4">
      <select name="category" id="Category" class="form-control" >
                             {{#each category}}

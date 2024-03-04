@@ -108,10 +108,10 @@ export const getadminLogin=async(req,res,next)=>{
 //create new post
 
 export const addNews= async(req,res,next)=>{
-  console.log("som")
+  
  
   console.log(req.body,"req")
-    const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph} = req.body;
+    const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph,isBreaking} = req.body;
     
     const dateString = date
     
@@ -136,7 +136,8 @@ export const addNews= async(req,res,next)=>{
       imagetitle1,
       imagetitle2,
       secondparagraph,
-      thirdparagraph
+      thirdparagraph,
+      isBreaking
     });
 
     try {

@@ -119,7 +119,7 @@
             style="width: calc(100% - 140px); padding-right: 100px;"
           >
             {{#each allnews}}
-              {{#isEqual this.category "breakingnews"}}
+              {{#if this.isBreaking}}
                 {{#ifCond @index "<" 4}}
 
                   <div class="text-truncate"><a
@@ -127,7 +127,7 @@
                       href="/detailnews/{{this.slug}}"
                     >{{this.title}}</a></div>
                 {{/ifCond}}
-              {{/isEqual}}
+              {{/if}}
             {{/each}}
           </div>
         </div>
