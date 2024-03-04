@@ -30,25 +30,40 @@ export const getNews=async(req,res,next)=>{
         const news=await NewsModel.find().sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
         const allnews=await NewsModel.find().sort({ createdAt: -1 }).limit(10).exec()
 
-       
         const category = await categoryModel.find().exec()
         
         const totalNewsCount = await NewsModel.countDocuments();
         const totalPages = Math.ceil(totalNewsCount / perPage);
 
-        
- 
-        const formattedNews = news.map((item) => {
-          return {
-              ...item.toObject(),
-              timeAgo: timeago.format(item.createdAt),
-              
-          };
+        const formattedNews = news.map(obj => {
+          // Assuming 'date' property contains the date in the format '3/2/2024'
+          const dateParts = obj.date.split('/');
+          const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          const month = parseInt(dateParts[0]) - 1; // Subtract 1 to convert from 1-based to 0-based index
+          const day = parseInt(dateParts[1]);
+          const year = parseInt(dateParts[2]);
+          const formattedDate = `${monthNames[month]} ${day} ${year}`;
+      
+          // Update the object with the formatted date
+          return { ...obj, ...obj.date= formattedDate };
       });
-      formattedNews.forEach(newsItem => {
+        
+        // console.log(resultDate,'dad');
+ 
+      //   const formattedNews = news.map((item) => {
+      //     return {
+      //         ...item.toObject(),
+      //         time: timeago.format(item.createdAt),
+              
+      //     };
+      // });
+      news.forEach(newsItem => {
+        
         newsItem.shortp = truncateToWords(newsItem.body);
+        //  newsItem.date=formattedNews.date
       });
     
+  
 
         function truncateToWords(str) {
           // const words = str.split(/\s+/);
@@ -94,7 +109,7 @@ const nextPage = Math.max(1, page + 1);
 
     
 
-        res.render('user/newsHome',{user:true,news:formattedNews,allnews,previousNews,nextNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate})
+        res.render('user/newsHome',{user:true,news,allnews,previousNews,nextNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate})
         
       //  return res.status(200).json(news)
     } catch (error) {
@@ -118,6 +133,7 @@ export const getDetailnews=async(req,res,next)=>{
         const page = req.query.page || 1;
         const cDate = moment();
         const currentDate = cDate.format('MMMM DD dddd YYYY')
+        
        
         
         // console.log(id,"id")
@@ -130,9 +146,26 @@ export const getDetailnews=async(req,res,next)=>{
             return truncatedWords;
           }
 
+          const dateString = news.date;
+const dateParts = dateString.split('/'); // Split the date string into parts
+ // Split the date string into parts
+const month = parseInt(dateParts[0]) - 1; // Subtract 1 from month as it is zero-indexed
+const day = parseInt(dateParts[1]);
+const year = parseInt(dateParts[2]);
+
+const formattedDate = new Date(year, month, day);
+const monthName = formattedDate.toLocaleDateString('en-US', { month: 'long' });
+const dayOfMonth = formattedDate.getDate();
+const dayOfWeek = formattedDate.toLocaleDateString('en-US', { weekday: 'long' });
+const fullYear = formattedDate.getFullYear();
+
+const resultDate = `${monthName} ${dayOfMonth} ${dayOfWeek} ${fullYear}`;
+
+console.log(resultDate,'dad');
+
         // const fullNews=await NewsModel.find().sort({ createdAt: -1 }).limit(4).exec()
 
-        const timead=timeago.format(news.createdAt);
+        // const timead=timeago.format(news.createdAt);
        
       
         //   news.shortp = truncateToWords(news.body);
@@ -194,16 +227,17 @@ const nextPage = Math.max(1, page + 1);
    const trendingTotalPages = Math.ceil(trendingTotalCount / trendingPerPage);
    const allnews=await NewsModel.find().sort({ createdAt: -1 }).limit().exec()
    
-        res.render('user/singlePage',{user:true,news,img,previousNews,nextNews,timead,currentDate,allnews, trendingNews, trendingTotalPages, trendingPage,previousPage,nextPage})
+        res.render('user/singlePage',{user:true,news,img,resultDate,previousNews,nextNews,currentDate,allnews, trendingNews, trendingTotalPages, trendingPage,previousPage,nextPage})
 
         // return res.status(200).json(news);
       } catch (error) {
-        // console.log(error,"errrrr")
+        console.log(error,"errrrr")
         // return res.status(400).json({
         //   message: "error while getting single blog",
         //   error,
         // });
      next(error)
+     
 
       }
   
@@ -214,6 +248,7 @@ export const getCategorynews=async(req,res,next)=>{
    
     const cDate = moment();
     const currentDate = cDate.format('MMMM DD dddd YYYY')
+    console.log(currentDate,"cudd")
     try {
         
         let category = req.query.category;
@@ -290,4 +325,13 @@ export const getCategorynews=async(req,res,next)=>{
           console.log(error,'ere')
 
       }
+}
+
+
+export const getContactpage=async(req,res,next)=>{
+  try {
+    res.render('user/contact',{user:true})
+  } catch (error) {
+    next(error)
+  }
 }

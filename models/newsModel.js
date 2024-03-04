@@ -11,6 +11,10 @@ const newsSchema=mongoose.Schema(
     {
         
         title: String,
+        isBreaking:{
+            type:Boolean,
+            default:false
+        },
         subtitle:String,
         category:String,
         image1:String,

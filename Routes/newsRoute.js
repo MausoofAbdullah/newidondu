@@ -1,5 +1,5 @@
 import express from "express"
-import {getNews,getDetailnews,getCategorynews} from "../controllers/newsController.js"
+import {getNews,getDetailnews,getCategorynews,getContactpage} from "../controllers/newsController.js"
 
 const router=express.Router()
 
@@ -13,6 +13,8 @@ router.get('/detailnews/:slug',getDetailnews)
 
 
 router.get('/category',getCategorynews)
+
+router.get('/contact',getContactpage)
 
 
 
