@@ -22,13 +22,16 @@ const newsSchema=mongoose.Schema(
         images:[String],
         imagetitle1:String,
         imagetitle2:String,
-      
+    //   views:Number,
        
             date:String,
             body:String,
             secondparagraph:String,
             thirdparagraph:String,
-         
+         views:{
+            type:Number,
+            default:0
+         },
 
         // reports working
         reports:{

@@ -133,11 +133,20 @@ export const getDetailnews=async(req,res,next)=>{
         const page = req.query.page || 1;
         const cDate = moment();
         const currentDate = cDate.format('MMMM DD dddd YYYY')
+
         
        
         
         // console.log(id,"id")
         const news = await NewsModel.findOne({slug:slug});
+        if (news) {
+          news.views += 1; // Increment the view count
+          await news.save(); // Save the updated news article with the incremented view count
+      }
+        
+   
+     
+    
         news.shortD=truncateBody(news.body);
         function truncateBody(str) {
             // const words = str.split(/\s+/);
