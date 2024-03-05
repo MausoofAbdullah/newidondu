@@ -10,7 +10,7 @@
                     <th scope="col">views</th>
                     <th scope="col">title</th>
                     <th scope="col">Category</th>
-                    <th scope="col">Discription</th>
+                    
                     <th scope="col">date</th>
                     <th scope="col">Image</th>
                     <th scope="col">Options</th>
@@ -23,7 +23,7 @@
                     <th scope="row">{{this.views}}</th>
                     <td>{{this.title}} </td>
                          <td>{{this.category}} </td>
-                    <td>something </td>
+                 
                     <td>₹{{this.date}}</td>
                     <td><img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{this.image1}}" style="width: 50px; height: 50px;"></td>
                 
@@ -36,4 +36,19 @@
         </table>
     </div>
 
+
 </section> 
+<script >
+    $(document).ready(function () {
+
+
+        $('#usersTable').wrap('<div id="hide" style="display:none"/>');
+
+        $('#hide').css('display', 'block');
+    });
+
+
+    var table = $('#usersTable').DataTable();
+    
+
+</script>

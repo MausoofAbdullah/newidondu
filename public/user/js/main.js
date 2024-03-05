@@ -2,7 +2,8 @@
     "use strict";
     
     // Dropdown on mouse hover
-    $(document).ready(function () {
+    
+    
         function toggleNavbarMethod() {
             if ($(window).width() > 992) {
                 $('.navbar .dropdown').on('mouseover', function () {
@@ -126,6 +127,8 @@
             }
         }
     });
+
+  
     
 
     // Carousel item 4
@@ -158,6 +161,9 @@
             }
         }
     });
+
+
     
 })(jQuery);
+
 
