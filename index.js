@@ -8,6 +8,7 @@ import path from "path"
 import hbs from "express-handlebars"
 import handlebars from "handlebars"
 import cookieParser from "cookie-parser";
+import session from "express-session"
 
 
 // import cheerio from "cheerio"
@@ -91,6 +92,14 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
 app.use(cors());
+app.use(session({
+  secret: process.env.SECRET_SEESSION, // Specify a secret key for session encryption
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
+}
+}));
 dotenv.config();
 
 
