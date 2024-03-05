@@ -2,7 +2,7 @@ import express from "express"
 import {addCategory, addNews, getCategory,adminRegister,adminLogin,
   getAdmin,getadminLogin,adminLogout,viewNews,editNews,updateNews} from "../controllers/AdminController.js"
 
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+// import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v2 as cloudinary } from 'cloudinary';
 import multer from "multer"
 
@@ -30,8 +30,8 @@ cloudinary.config({
 //     },
 //   });
 
-const storage = new CloudinaryStorage({
-// const storage = ({
+// const storage = new CloudinaryStorage({
+const storage = ({
     cloudinary: cloudinary,
     params: {
       folder: 'news', // Set your desired folder in Cloudinary
