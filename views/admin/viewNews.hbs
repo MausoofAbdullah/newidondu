@@ -7,6 +7,7 @@
             <thead>
                 <tr>
                     <th scope="col">Number</th>
+                    <th scope="col">views</th>
                     <th scope="col">title</th>
                     <th scope="col">Category</th>
                     <th scope="col">Discription</th>
@@ -19,6 +20,7 @@
                 {{#each allnews}}
                 <tr>
                     <th scope="row">{{inc @index}}</th>
+                    <th scope="row">{{this.views}}</th>
                     <td>{{this.title}} </td>
                          <td>{{this.category}} </td>
                     <td>something </td>
