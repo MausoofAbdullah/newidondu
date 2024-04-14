@@ -93,7 +93,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
 app.use(cors());
 app.use(session({
-  secret: process.env.SECRET_SEESSION, // Specify a secret key for session encryption
+  secret: "secret", // Specify a secret key for session encryption
   resave: false,
   saveUninitialized: true,
   cookie: {
