@@ -18,7 +18,7 @@ import jwt from "jsonwebtoken";
 dotenv.config()
 const serverPublic="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/"
 export const adminRegister = async (req, res,next) => {
-  console.log(req.body,'re')  
+ 
 
    const {firstname, lastname,username} = req.body
         const salt = await bcrypt.genSalt(10);
@@ -26,7 +26,7 @@ export const adminRegister = async (req, res,next) => {
     req.body.password = hashedPass;
   
     const newAdmin = new adminModel({firstname,lastname,username,password:hashedPass});
-    console.log(newAdmin,"new")
+  
   //  const newAdmin= new UserModel({username,password,...req.body});
    // const {username,password,...rest}=new UserModel(req.body)
     
@@ -37,7 +37,7 @@ export const adminRegister = async (req, res,next) => {
     try {
     
       const admin = await newAdmin.save();
-      console.log(admin,"dad")
+   
   
    
       res.status(200).json({ admin });
@@ -47,7 +47,7 @@ export const adminRegister = async (req, res,next) => {
     }
   };
 export const getadminLogin=async(req,res,next)=>{
-  console.log(req.user,"us")
+ 
   if(!req.user.email){
     const message = req.query.message || '';
     const admins=req.user.email
@@ -60,11 +60,11 @@ export const getadminLogin=async(req,res,next)=>{
 
   export const adminLogin = async (req, res,next) => {
     const { username,password} = req.body;
-    console.log(req.body,"re")
+
   
     try {
       const admin = await adminModel.findOne({username});
-      console.log(admin);
+     
   
       if (admin) {
         const validity = await bcrypt.compare(password, admin.password);
@@ -110,7 +110,7 @@ export const getadminLogin=async(req,res,next)=>{
 export const addNews= async(req,res,next)=>{
   
  
-  console.log(req.body,"req")
+  (req.body,"req")
     const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph,isBreaking} = req.body;
     
     const dateString = date
@@ -121,7 +121,7 @@ export const addNews= async(req,res,next)=>{
 
   
     const imageFiles = req.files;
-    console.log(imageFiles,'idm')
+    
 
     // Create a new NewsModel instance with the extracted data
     const newNews = new NewsModel({
@@ -142,7 +142,7 @@ export const addNews= async(req,res,next)=>{
 
     try {
         const sluf=await newNews.save()
-        console.log(sluf,'slug')
+        
         res.redirect('/admin-news')
         // res.status(200).json(newNews)
     } catch (error) {
@@ -195,7 +195,7 @@ export const addNews= async(req,res,next)=>{
 // }
 
 export const addCategory=async(req,res,next)=>{
-    console.log(req.body,"xd")
+  
     const cat= new categoryModel(req.body)
     const {category}=req.body
    
@@ -246,7 +246,7 @@ export const editNews=async(req,res,next)=>{
   try {
 
     const id=req.params.id
-console.log(id,"id")
+
     const news=await NewsModel.findOne({_id:id})
     const category = await categoryModel.find().exec()
    
@@ -259,7 +259,7 @@ console.log(id,"id")
 
 export const updateNews=async(req,res,next)=>{
   const id=req.params.id
-  console.log(req.body,"update")
+ 
   const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph} = req.body;
     
     const dateString = date
@@ -267,7 +267,7 @@ export const updateNews=async(req,res,next)=>{
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleDateString();
   const imageFiles = req.files;
-    console.log(imageFiles,'idm')
+    
 
 
   try {
@@ -288,7 +288,7 @@ export const updateNews=async(req,res,next)=>{
       }
     })
 
-    console.log(updatedNews,"updatednesd")
+    
     res.redirect('/viewnewsList')
   } catch (error) {
     next(error)

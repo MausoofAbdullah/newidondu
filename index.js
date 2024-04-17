@@ -8,6 +8,7 @@ import path from "path"
 import hbs from "express-handlebars"
 import handlebars from "handlebars"
 import cookieParser from "cookie-parser";
+import MongoDBStore from "connect-mongodb-session";
 import session from "express-session"
 
 
@@ -80,6 +81,12 @@ add: function (a, b) {
 extname:'hbs',defaultLayout:'userLayout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/',
  runtimeOptions: { allowProtoPropertiesByDefault: true, allowProtoMethodsByDefault: true,},}));
 
+
+ const MongoStore = MongoDBStore(session);
+const store = new MongoStore({
+  uri: process.env.MONGO_DB, // MongoDB connection URI
+  collection: 'sessions' // Collection name for storing sessions
+});
 // Static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(
@@ -95,7 +102,8 @@ app.use(cors());
 app.use(session({
   secret: "secret", // Specify a secret key for session encryption
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
+  store: store,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
 }
@@ -130,6 +138,7 @@ mongoose
     // useUnifiedTopology: true,
   })
   .then(() => {
+    
     app.listen(process.env.PORT, () => {
       console.log(`listening to port ${process.env.PORT}`);
     });

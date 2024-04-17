@@ -160,7 +160,7 @@ export const getDetailnews=async(req,res,next)=>{
         // Mark the article as viewed in the user's session to prevent duplicate views
         req.session.viewedArticles[slug] = true;
     }
-    console.log(req.session,"reqseddion")
+    
 
    
      
@@ -188,7 +188,7 @@ const fullYear = formattedDate.getFullYear();
 
 const resultDate = `${monthName} ${dayOfMonth} ${dayOfWeek} ${fullYear}`;
 
-console.log(resultDate,'dad');
+
 
         // const fullNews=await NewsModel.find().sort({ createdAt: -1 }).limit(4).exec()
 
@@ -216,8 +216,7 @@ console.log(resultDate,'dad');
       
       
       const img=news.images
-      console.log(img,"imd")
-
+     
 
       nextNews.shortp = truncateToWords(nextNews.title);
         
@@ -275,7 +274,7 @@ export const getCategorynews=async(req,res,next)=>{
    
     const cDate = moment();
     const currentDate = cDate.format('MMMM DD dddd YYYY')
-    console.log(currentDate,"cudd")
+   
     try {
         
         let category = req.query.category;
@@ -284,7 +283,7 @@ export const getCategorynews=async(req,res,next)=>{
         const perPage = 6;
         const page = req.query.page || 1;
           const cnews=await NewsModel.find({ category }).sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
-          console.log(cnews,"ddfd")
+        
           
           
         const news=await NewsModel.find().sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
