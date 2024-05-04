@@ -25,7 +25,7 @@ export const getNews=async(req,res,next)=>{
     
     try {
         // throw new Error("Something went wrong!");
-      const perPage = 6;
+      const perPage = 9;
       const page = req.query.page || 1;
         const news=await NewsModel.find().sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
         const allnews=await NewsModel.find().sort({ createdAt: -1 }).limit(10).exec()
@@ -88,7 +88,7 @@ const previousPage = Math.max(1, page - 1);
 const nextPage = Math.max(1, page + 1);
 
     // Pagination for trending news
-    const trendingPerPage = 4; // Set the number of trending news items per page
+    const trendingPerPage = 8; // Set the number of trending news items per page
     const trendingPage = req.query.trendingPage || 1;
 
     const trendingNews = await NewsModel.find()
@@ -165,7 +165,7 @@ export const getDetailnews=async(req,res,next)=>{
    
      
     
-        news.shortD=truncateBody(news.body);
+        news.shortD=truncateBody(news?.body);
         function truncateBody(str) {
             // const words = str.split(/\s+/);
             const truncatedWords = str.slice(0, 80);
@@ -212,18 +212,20 @@ const resultDate = `${monthName} ${dayOfMonth} ${dayOfWeek} ${fullYear}`;
 
 
         // Get the next news
-        const nextNews = await NewsModel.findOne({ createdAt: { $gt: news.createdAt } }).sort({ createdAt: 1 }).exec() || await NewsModel.findOne().sort({ createdAt: 1 }).exec();
+        const nextNews = await NewsModel.findOne({ createdAt: { $gt: news.createdAt } }).sort({ createdAt: 1 }).exec() 
+    
       
-      
-      const img=news.images
+      const img=news?.images
      
+if(nextNews){
 
-      nextNews.shortp = truncateToWords(nextNews.title);
+  nextNews.shortp = truncateToWords(nextNews?.title);
+}
         
 
       function truncateToWords(str) {
         // const words = str.split(/\s+/);
-        const truncatedWords = str.slice(0, 80);
+        const truncatedWords = str?.slice(0, 80);
         
         return truncatedWords;
       }
@@ -238,7 +240,7 @@ const resultDate = `${monthName} ${dayOfMonth} ${dayOfWeek} ${fullYear}`;
    // Pagination for trending news
    const previousPage = Math.max(1, page - 1);
 const nextPage = Math.max(1, page + 1);
-   const trendingPerPage = 4; // Set the number of trending news items per page
+   const trendingPerPage = 8; // Set the number of trending news items per page
    const trendingPage = req.query.trendingPage || 1;
 
    const trendingNews = await NewsModel.find()
@@ -252,6 +254,9 @@ const nextPage = Math.max(1, page + 1);
    const trendingTotalCount = await NewsModel.countDocuments();
    const trendingTotalPages = Math.ceil(trendingTotalCount / trendingPerPage);
    const allnews=await NewsModel.find().sort({ createdAt: -1 }).limit().exec()
+   allnews.forEach(newsItem => {
+    newsItem.shortp = truncateToWords(newsItem.title);
+  });
    
         res.render('user/singlePage',{user:true,news,img,resultDate,previousNews,nextNews,currentDate,allnews, trendingNews, trendingTotalPages, trendingPage,previousPage,nextPage})
 
@@ -280,7 +285,7 @@ export const getCategorynews=async(req,res,next)=>{
         let category = req.query.category;
       
         const currentPath = req.path;
-        const perPage = 6;
+        const perPage = 9;
         const page = req.query.page || 1;
           const cnews=await NewsModel.find({ category }).sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
         
@@ -329,7 +334,7 @@ export const getCategorynews=async(req,res,next)=>{
   const nextPage = Math.max(1, page + 1);
   
       // Pagination for trending news
-      const trendingPerPage = 6; // Set the number of trending news items per page
+      const trendingPerPage = 9; // Set the number of trending news items per page
       const trendingPage = req.query.trendingPage || 1;
   
       const trendingNews = await NewsModel.find()

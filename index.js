@@ -118,22 +118,11 @@ app.get('/robots.txt', function(req, res) {
 app.get('/sitemap.xml', function(req, res) {
   res.sendFile(path.join(__dirname, 'sitemap.xml'));
 });
-  app.use('/',adminRoute)
-  app.use('/',newsRoute)
-  app.use((req, res, next) => {
-    const error = new Error("Not found the page");
-    error.status = 404;
-    next(error);
-  });
-     // error handler middleware
-     app.use((error, req, res, next) => {
-    res.render('user/error',{ message: 'Please try again or another method'})
-    });
 
 
 // const PORT=3000
 mongoose
-  .connect(process.env.MONGO_DB, {
+.connect(process.env.MONGO_DB, {
     // useNewUrlParser: true,
     // useUnifiedTopology: true,
   })
@@ -146,7 +135,18 @@ mongoose
   .catch((error) => {
     console.log(error);
     
-
+    
+    app.use('/',adminRoute)
+    app.use('/',newsRoute)
+    app.use((req, res, next) => {
+      const error = new Error("Not found the page");
+      error.status = 404;
+      next(error);
+    });
+       // error handler middleware
+       app.use((error, req, res, next) => {
+      res.render('user/error',{ message: 'Please try again or another method'})
+      });
   });
  
   
