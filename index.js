@@ -118,7 +118,9 @@ app.get('/robots.txt', function(req, res) {
 app.get('/sitemap.xml', function(req, res) {
   res.sendFile(path.join(__dirname, 'sitemap.xml'));
 });
-
+app.get('/ads.txt', function(req, res) {
+  res.sendFile(path.join(__dirname, 'ads.txt'));
+});
 
 // const PORT=3000
 mongoose
