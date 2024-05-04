@@ -136,18 +136,18 @@ mongoose
     console.log(error);
     
     
-    app.use('/',adminRoute)
-    app.use('/',newsRoute)
-    app.use((req, res, next) => {
-      const error = new Error("Not found the page");
-      error.status = 404;
-      next(error);
-    });
-       // error handler middleware
-       app.use((error, req, res, next) => {
-      res.render('user/error',{ message: 'Please try again or another method'})
-      });
   });
+  app.use('/',adminRoute)
+  app.use('/',newsRoute)
+  app.use((req, res, next) => {
+    const error = new Error("Not found the page");
+    error.status = 404;
+    next(error);
+  });
+     // error handler middleware
+     app.use((error, req, res, next) => {
+    res.render('user/error',{ message: 'Please try again or another method'})
+    });
  
   
 // there is no change pleaese adjust
