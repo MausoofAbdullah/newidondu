@@ -168,7 +168,7 @@ export const getDetailnews=async(req,res,next)=>{
         news.shortD=truncateBody(news?.body);
         function truncateBody(str) {
             // const words = str.split(/\s+/);
-            const truncatedWords = str.slice(0, 80);
+            const truncatedWords = str?.slice(0, 80);
             
             return truncatedWords;
           }
