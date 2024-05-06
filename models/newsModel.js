@@ -59,9 +59,9 @@ newsSchema.pre('validate',async function(next){
         const kannadaTitle = this.title.slice(0,20);
      const   kannadaTitles = slugify(kannadaTitle, {seperator:" - ",   lowercase: true });
 
-        const uniqueId =await generateUniqueId()
-        console.log(uniqueId,"ud")
- this.slug = kannadaTitles+"-no-"+uniqueId
+        // const uniqueId =await generateUniqueId()
+        // console.log(uniqueId,"ud")
+ this.slug = kannadaTitles
 //  this.slug = slugify(kannadaTitle, { lowercase: true });
 // console.log(slug,"sofd");
     }
@@ -70,7 +70,7 @@ newsSchema.pre('validate',async function(next){
 const NewsModel=mongoose.model("posts",newsSchema)
 export default NewsModel
 
-async function generateUniqueId() {
-    const count = await NewsModel.countDocuments();
-    return 100 + count;
-}
+// async function generateUniqueId() {
+//     const count = await NewsModel.countDocuments();
+//     return 100 + count;
+// }
