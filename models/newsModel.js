@@ -70,7 +70,7 @@ newsSchema.pre('validate',async function(next){
 const NewsModel=mongoose.model("posts",newsSchema)
 export default NewsModel
 
-// async function generateUniqueId() {
-//     const count = await NewsModel.countDocuments();
-//     return 100 + count;
-// }
+async function generateUniqueId() {
+    const count = await NewsModel.countDocuments();
+    return 100 + count;
+}
