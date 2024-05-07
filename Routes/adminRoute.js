@@ -53,8 +53,8 @@ const storage = new CloudinaryStorage({
   });
   const multipleupload=upload.fields([{name:'image1'},{name:"image2"},{name:"images",maxCount:5}])
  
-router.get('/admin',authMiddleware,getadminLogin)
-router.post('/admin',adminLogin)
+router.get('/',authMiddleware,getadminLogin)
+router.post('/',adminLogin)
 router.get('/admin-news',authMiddleware,getAdmin)
 // router.get('/admin-news',authMiddleware,getAdmin)
 router.post('/admin-addnews',authMiddleware,multipleupload,addNews)

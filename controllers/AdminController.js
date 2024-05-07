@@ -55,7 +55,7 @@ export const getadminLogin=async(req,res,next)=>{
     res.render('admin/admin-login',{admin:true,admins})
   }
 
-  res.redirect('/admin-news')
+  res.redirect('/admin/admin-news')
 }
 
   export const adminLogin = async (req, res,next) => {
@@ -85,7 +85,7 @@ export const getadminLogin=async(req,res,next)=>{
           res.cookie('token', token);
 
           // Redirect to the add-news page on successful login
-          res.redirect('/admin-news');
+          res.redirect('/admin/admin-news');
           
           // res.status(200).json({admin,token });
         }
@@ -215,7 +215,7 @@ export const addCategory=async(req,res,next)=>{
             res.status(500).json("already exists")
         }
         await cat.save()
-        res.redirect('/categories')
+        res.redirect('/admin/categories')
         // res.status(200).json(cat)
     } catch (error) {
         // res.status(500).json(error)
@@ -299,7 +299,7 @@ export const updateNews=async(req,res,next)=>{
     })
 
     
-    res.redirect('/viewnewsList')
+    res.redirect('/admin/viewnewsList')
   } catch (error) {
     next(error)
     

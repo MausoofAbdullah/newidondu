@@ -14,7 +14,7 @@
                             <a class="nav-link text-body small" href="/category?category=contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-body small" href="/login">Login</a>
+                            <a class="nav-link text-body small" href="/admin/login">Login</a>
                         </li>
                     </ul>
                 </nav>
@@ -75,13 +75,13 @@
                 <div class="navbar-nav mr-auto py-0">
                     <a href="/admin" class="nav-item nav-link ">Adminpage</a>
                     
-                    <a href="/categories" class="nav-item nav-link">addcategories</a>
-                    <a href="/viewnewsList" class="nav-item nav-link">newslist</a>
+                    <a href="/admin/categories" class="nav-item nav-link">addcategories</a>
+                    <a href="/admin/viewnewsList" class="nav-item nav-link">newslist</a>
                    
                 {{#if admins}}
-                    <a href="/logout" class="nav-item nav-link">Logout</a>
+                    <a href="/admin/logout" class="nav-item nav-link">Logout</a>
                     {{else}}
-                    <a href="/admin" class="nav-item nav-link">Login</a>
+                    <a href="/admin/admin" class="nav-item nav-link">Login</a>
             {{/if}}
                     <a href="/category?category=contact" class="nav-item nav-link">contactus </a>
                     {{!-- <div class="nav-item dropdown">
