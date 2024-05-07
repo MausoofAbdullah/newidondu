@@ -5,7 +5,7 @@ import UserModel from "../models/userModel.js";
 import adminModel from "../models/adminModel.js";
 import dotenv from "dotenv"
 import timeago from 'timeago.js';
-
+import { slugify } from 'transliteration';
 
 
 import mongoose from "mongoose";
@@ -108,9 +108,12 @@ export const getadminLogin=async(req,res,next)=>{
 //create new post
 
 export const addNews= async(req,res,next)=>{
-  
+  const totalCount = await NewsModel.countDocuments();
+
+    // Increment the count by one to get the next article number
+    const articleNumber = totalCount + 101;
  
-  (req.body,"req")
+  // (req.body,"req")
     const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph,isBreaking} = req.body;
     
     const dateString = date
@@ -118,9 +121,15 @@ export const addNews= async(req,res,next)=>{
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleDateString();
   // console.log(formattedDate,"date")
+  
 
   
     const imageFiles = req.files;
+    const kannadaTitle = title.slice(0,20);
+    const   kannadaTitles = slugify(kannadaTitle, {seperator:" - ",   lowercase: true });
+ 
+const slug=kannadaTitles+"-n0-"+articleNumber
+console.log(slug,"sssssss")
     
 
     // Create a new NewsModel instance with the extracted data
@@ -137,6 +146,7 @@ export const addNews= async(req,res,next)=>{
       imagetitle2,
       secondparagraph,
       thirdparagraph,
+      slug,
       isBreaking
     });
 

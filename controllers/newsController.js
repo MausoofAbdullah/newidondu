@@ -129,7 +129,9 @@ const nextPage = Math.max(1, page + 1);
 export const getDetailnews=async(req,res,next)=>{
     try {
         const { id } = req.params;
+        console.log(id,"iddd")
         const {slug} =req.params
+        console.log(slug,"slugin dets")
         const page = req.query.page || 1;
         const cDate = moment();
         const currentDate = cDate.format('MMMM DD dddd YYYY')

@@ -5,7 +5,7 @@ import {marked} from 'marked'
 import speakingurl from 'speakingurl';
 // import slugify from 'slug';
 // import { slugify,slugifyUrl } from "transliteration";
-import { slugify } from 'transliteration';
+    import { slugify } from 'transliteration';
 
 const newsSchema=mongoose.Schema(
     {
@@ -54,23 +54,35 @@ const newsSchema=mongoose.Schema(
         timestamps:true
     }
 )
-newsSchema.pre('validate',async function(next){
-    if(this.title){
-        const kannadaTitle = this.title.slice(0,20);
-     const   kannadaTitles = slugify(kannadaTitle, {seperator:" - ",   lowercase: true });
+// newsSchema.pre('validate',async function(next){
+//     if(this.title){
+//         const kannadaTitle = this.title.slice(0,20);
+//      const   kannadaTitles = slugify(kannadaTitle, {seperator:" - ",   lowercase: true });
 
-        const uniqueId =await generateUniqueId()
-        console.log(uniqueId,"ud")
- this.slug = kannadaTitles+"-no-"+uniqueId
-//  this.slug = slugify(kannadaTitle, { lowercase: true });
-// console.log(slug,"sofd");
-    }
-    next()
-})
+//          const uniqueId =await generateUniqueId()
+//         console.log(uniqueId,"ud")
+//  this.slug = kannadaTitles+"-no-"+uniqueId
+
+//     }
+//     next()
+// })
 const NewsModel=mongoose.model("posts",newsSchema)
 export default NewsModel
 
-async function generateUniqueId() {
-    const count = await NewsModel.countDocuments();
-    return 100 + count;
-}
+// async function generateUniqueId() {
+//     const count = await NewsModel.countDocuments();
+//     return 100 + count;
+// }
+
+// async function generateUniqueId() {
+//     const lastDocument = await NewsModel.findOne().sort({ _id: -1 });
+//     const lastId = lastDocument ? parseInt(lastDocument._id.toString().slice(-4)) : 0;
+//     return lastId + 1;
+// }
+// async function generateUniqueId() {
+//     const count = await NewsModel.countDocuments();
+//     const lastDocument = await NewsModel.findOne().sort({ _id: -1 });
+//     const lastId = lastDocument ? parseInt(lastDocument._id.toString().slice(-4)) : 0;
+//     const uniqueId = lastId + 1+100+count 
+//     return  uniqueId
+// }
