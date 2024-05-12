@@ -456,6 +456,7 @@
   
 
   function shareOnWhatsApp(title, image, newsId) {
+    console.log("clicked")
  
     
       const baseUrl = window.location.origin; 
@@ -473,27 +474,6 @@
   }
 
 
-function parseTextWithLinks(text) {
-    return text.replace(/(\b(?:(?:https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, function(match) {
-        if (match.startsWith('www.')) {
-            return '<a href="http://' + match + '" target="_blank">' + match + '</a>';
-        } else {
-            return '<a href="' + match + '" target="_blank">' + match + '</a>';
-        }
-    });
-}
-
-        // Get the news body from the server and display it
-        window.addEventListener('DOMContentLoaded', function () {
-            // Simulate getting news body data from the server
-            const newsBodyData = "{{ news.body }}"; // Replace this with the actual news body data from the server
-
-            // Parse the news body text to convert URLs into clickable links
-            const parsedNewsBody = parseTextWithLinks(newsBodyData);
-
-            // Display the parsed news body in the HTML
-            document.getElementById('newsBody').innerHTML = parsedNewsBody;
-        });
 </script>
                   
                   <style>
