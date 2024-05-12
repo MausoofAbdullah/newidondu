@@ -109,7 +109,7 @@ const nextPage = Math.max(1, page + 1);
 
     
 
-        res.render('user/newsHome',{user:true,news,allnews,previousNews,nextNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate})
+        res.render('user/newsHome',{news,allnews,previousNews,nextNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate})
         
       //  return res.status(200).json(news)
     } catch (error) {
@@ -129,7 +129,7 @@ const nextPage = Math.max(1, page + 1);
 export const getDetailnews=async(req,res,next)=>{
     try {
         const { id } = req.params;
-        console.log(id,"iddd")
+        
         const {slug} =req.params
         console.log(slug,"slugin dets")
         const page = req.query.page || 1;

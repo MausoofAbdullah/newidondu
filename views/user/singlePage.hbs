@@ -51,7 +51,7 @@
                                 <a class="text-body" href="">{{resultDate}}.</a>
                             </div>
                             <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{news.title}}</h1>
-                            <p class="preserve-line-breaks">{{news.body}}.<br> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
+                            <p id="newsBody" class="preserve-line-breaks">{{news.body}}.<br> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -471,6 +471,29 @@
     window.open(whatsappLink, '_blank');
 
   }
+
+
+function parseTextWithLinks(text) {
+    return text.replace(/(\b(?:(?:https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, function(match) {
+        if (match.startsWith('www.')) {
+            return '<a href="http://' + match + '" target="_blank">' + match + '</a>';
+        } else {
+            return '<a href="' + match + '" target="_blank">' + match + '</a>';
+        }
+    });
+}
+
+        // Get the news body from the server and display it
+        window.addEventListener('DOMContentLoaded', function () {
+            // Simulate getting news body data from the server
+            const newsBodyData = "{{ news.body }}"; // Replace this with the actual news body data from the server
+
+            // Parse the news body text to convert URLs into clickable links
+            const parsedNewsBody = parseTextWithLinks(newsBodyData);
+
+            // Display the parsed news body in the HTML
+            document.getElementById('newsBody').innerHTML = parsedNewsBody;
+        });
 </script>
                   
                   <style>

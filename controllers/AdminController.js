@@ -153,7 +153,7 @@ console.log(slug,"sssssss")
     try {
         const sluf=await newNews.save()
         
-        res.redirect('/admin-news')
+        res.redirect('/admin/admin-news')
         // res.status(200).json(newNews)
     } catch (error) {
         // res.status(500).json(error)
