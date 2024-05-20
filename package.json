@@ -24,6 +24,7 @@
     "get-urls": "^12.1.0",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
+    "lru-cache": "^10.2.2",
     "marked": "^12.0.0",
     "moment": "^2.30.1",
     "mongoose": "^8.2.0",

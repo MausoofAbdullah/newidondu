@@ -145,23 +145,26 @@ export const getDetailnews=async(req,res,next)=>{
       //     news.views += 1; // Increment the view count
       //     await news.save(); // Save the updated news article with the incremented view count
       // }
-      if (!req.session.viewedArticles) {
-        req.session.viewedArticles = {}; // Initialize the viewedArticles object in the session
-    }
 
-    if (!req.session.viewedArticles[slug]) {
-        // Find the news article by its slug
-        const news = await NewsModel.findOne({ slug });
 
-        // If the article is found, increment its view count
-        if (news) {
-            news.views += 1; // Increment the view count
-            await news.save(); // Save the updated news article with the incremented view count
-        }
 
-        // Mark the article as viewed in the user's session to prevent duplicate views
-        req.session.viewedArticles[slug] = true;
-    }
+    //   if (!req.session.viewedArticles) {
+    //     req.session.viewedArticles = {}; // Initialize the viewedArticles object in the session
+    // }
+
+    // if (!req.session.viewedArticles[slug]) {
+    //     // Find the news article by its slug
+    //     const news = await NewsModel.findOne({ slug });
+
+    //     // If the article is found, increment its view count
+    //     if (news) {
+    //         news.views += 1; // Increment the view count
+    //         await news.save(); // Save the updated news article with the incremented view count
+    //     }
+
+    //     // Mark the article as viewed in the user's session to prevent duplicate views
+    //     req.session.viewedArticles[slug] = true;
+    // }
     
 
    
@@ -242,6 +245,7 @@ if(nextNews){
    // Pagination for trending news
    const previousPage = Math.max(1, page - 1);
 const nextPage = Math.max(1, page + 1);
+console.log(nextPage,"nexxxxxxxxt")
    const trendingPerPage = 8; // Set the number of trending news items per page
    const trendingPage = req.query.trendingPage || 1;
 

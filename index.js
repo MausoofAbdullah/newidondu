@@ -102,7 +102,7 @@ app.use(cors());
 app.use(session({
   secret: "secret", // Specify a secret key for session encryption
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   store: store,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
