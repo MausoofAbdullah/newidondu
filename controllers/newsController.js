@@ -5,6 +5,7 @@ import UserModel from "../models/userModel.js";
 import dotenv from "dotenv"
 import timeago from 'timeago.js';
 import moment from 'moment'
+import addModel from "../models/addModel.js";
 
 
 const serverPublic="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/"
@@ -107,9 +108,11 @@ const nextPage = Math.max(1, page + 1);
     // Get the next news
     const nextNews = await NewsModel.findOne({ createdAt: { $gt: news.createdAt } }).sort({ createdAt: 1 }).exec() || await NewsModel.findOne().sort({ createdAt: 1 }).exec();
 
-    
+    const allAdds=await addModel.find().sort({ createdAt: 1 }).exec()
+    const addNumberOne = allAdds.find(add => add.addnumber === 1);
+    const filteredAdds = allAdds.filter(add => add.addnumber !== 1);
 
-        res.render('user/newsHome',{news,allnews,previousNews,nextNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate})
+        res.render('user/newsHome',{news,allnews,previousNews,nextNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate,allAdds:filteredAdds,addNumberOne})
         
       //  return res.status(200).json(news)
     } catch (error) {
@@ -263,8 +266,13 @@ console.log(nextPage,"nexxxxxxxxt")
    allnews.forEach(newsItem => {
     newsItem.shortp = truncateToWords(newsItem.title);
   });
+
+  const allAdds=await addModel.find().sort({ createdAt: -1 }).exec()
+  const addNumberOne = allAdds.find(add => add.addnumber === 1);
+  const filteredAdds = allAdds.filter(add => add.addnumber !== 1);
+
    
-        res.render('user/singlePage',{user:true,news,img,resultDate,previousNews,nextNews,currentDate,allnews, trendingNews, trendingTotalPages, trendingPage,previousPage,nextPage})
+        res.render('user/singlePage',{user:true,addNumberOne,allAdds:filteredAdds,news,img,resultDate,previousNews,nextNews,currentDate,allnews, trendingNews, trendingTotalPages, trendingPage,previousPage,nextPage})
 
         // return res.status(200).json(news);
       } catch (error) {
@@ -353,8 +361,12 @@ export const getCategorynews=async(req,res,next)=>{
       const trendingTotalPages = Math.ceil(trendingTotalCount / trendingPerPage);
   
       
+  const allAdds=await addModel.find().sort({ createdAt: -1 }).exec()
+  const addNumberOne = allAdds.find(add => add.addnumber === 1);
+  const filteredAdds = allAdds.filter(add => add.addnumber !== 1);
+
   
-          res.render('user/category',{user:true,news:formattedNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate,cnews})
+          res.render('user/category',{user:true,addNumberOne,allAdds:filteredAdds,news:formattedNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate,cnews})
           
         //  return res.status(200).json(news)
       } catch (error) {
@@ -372,3 +384,4 @@ export const getContactpage=async(req,res,next)=>{
     next(error)
   }
 }
+

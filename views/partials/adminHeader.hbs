@@ -77,6 +77,17 @@
                     
                     <a href="/admin/categories" class="nav-item nav-link">addcategories</a>
                     <a href="/admin/viewnewsList" class="nav-item nav-link">newslist</a>
+                    {{!-- <a href="/admin/advertisement" class="nav-item nav-link">Advertisement</a> --}}
+
+                    <div class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Advertisement
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="/admin/advertisement">Add Ads</a>
+    <a class="dropdown-item" href="/admin/viewAdds">View Ads</a>
+  </div>
+</div>
                    
                 {{#if admins}}
                     <a href="/admin/logout" class="nav-item nav-link">Logout</a>

@@ -170,13 +170,13 @@
     </div>
  
 </div> --}}
-          <div class="col-lg-12 mb-3">
+          {{!-- <div class="col-lg-12 mb-3">
             <a href=""><img
                 class="img-fluid w-100"
                 src="img/ads-728x90.png"
                 alt=""
               /></a>
-          </div>
+          </div> --}}
           <div class="col-lg-6">
             {{!-- {{#each news}}
                 {{#ifCond @index '<' 2}}
@@ -234,13 +234,13 @@
             {{!-- {{/each}}  --}}
           </div>
 
-          <div class="col-lg-12 mb-3">
+          {{!-- <div class="col-lg-12 mb-3">
             <a href=""><img
                 class="img-fluid w-100"
                 src="img/ads-728x90.png"
                 alt=""
               /></a>
-          </div>
+          </div> --}}
 
         </div>
 
@@ -249,20 +249,39 @@
       <div class="col-lg-4">
         <!-- Social Follow Start -->
         <div class="mb-3">
-          <div class="section-title mb-0">
+          {{!-- <div class="section-title mb-0">
             <h4 class="m-0 text-uppercase font-weight-bold">Advertise</h4>
-          </div>
+          </div> --}}
           <div class="bg-white border border-top-0 p-3">
+               <div class="bg-white border border-top-0 p-3 d-none d-md-block">
+               {{#if addNumberOne}}
+                 <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{addNumberOne.image1}}" alt="Advertisement" class="img-fluid " style="object-fit: cover;"> 
+               {{else}}
             <div style="border: solid 1px red;">
-              <h1>Market your buisiness here</h1>
+              <h4>To publish adds contact idondusuddi@gmail.com</h4> 
             </div>
+                 {{/if}}
+                 </div>
+             {{#if allAdds.length}}
+            {{#each allAdds}}
+            <div class="m-2" style="border: solid 1px rgb(194, 243, 255);">
+                               <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{this.image1}}" alt="Advertisement" class="img-fluid " style="object-fit: cover;"> 
+
+            </div>
+            {{/each}}
+            {{else}}
+            <div style="border: solid 1px red;">
+              <h4>To publish adds contact idondusuddi@gmail.com</h4> 
+            </div>
+            {{/if}}
+
             
           </div>
         </div>
         <!-- Social Follow End -->
 
         <!-- Ads Start -->
-        <div class="mb-3">
+        {{!-- <div class="mb-3">
           <div class="section-title mb-0">
             <h4 class="m-0 text-uppercase font-weight-bold">Advertisement</h4>
           </div>
@@ -272,7 +291,7 @@
               <h1>Market your buisiness here</h1>
             </div>
           </div>
-        </div>
+        </div> --}}
         <!-- Ads End -->
 
         <!-- Popular News Start -->

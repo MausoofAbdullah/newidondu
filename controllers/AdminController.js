@@ -12,6 +12,7 @@ import mongoose from "mongoose";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import addModel from "../models/addModel.js";
 
 
 
@@ -305,6 +306,68 @@ export const updateNews=async(req,res,next)=>{
     
   }
 }
+
+export const getAdvertisement=async(req,res)=>{
+  console.log("advertisement")
+  res.render('admin/advertisement',{admin:true})
+}
+
+export const postAdvertisement=async(req,res)=>{
+  console.log("postadd")
+  
+  // (req.body,"req")
+  const { _id,title, date, addnumber} = req.body;
+    
+  const dateString = date
+  
+const dateObject = new Date(dateString);
+const formattedDate = dateObject.toLocaleDateString();
+// console.log(formattedDate,"date")
+
+
+
+  const imageFiles = req.files;
+
+
+
+  
+
+  // Create a new NewsModel instance with the extracted data
+  const newAdd = new addModel({
+    title,
+    addnumber,
+    date:formattedDate,
+  
+    image1: imageFiles['image1']?.[0].filename, // Get the filename for image1
+    image2: imageFiles['image2']?.[0].filename, // Get the filename for image2
+    images: imageFiles['images']?.map(file => file.filename), 
+ 
+  });
+
+  try {
+      const sluf=await newAdd.save()
+      
+      res.redirect('/admin/advertisement')
+      // res.status(200).json(newNews)
+  } catch (error) {
+      // res.status(500).json(error)
+      console.log(error,'erer')
+next(error)
+
+  }
+}
+
+export const viewAdds=async(req,res,next)=>{
+  try {
+    const allAdds=await addModel.find().sort({ createdAt: -1 }).exec()
+    const admins=req.user.email
+
+    res.render('admin/view-advertisement',{admin:true,allAdds,admins})
+  } catch (error) {
+    next(error)
+  }
+}
+
  //logout functions
  export const adminLogout=async(req,res)=>{
   res.clearCookie('token')

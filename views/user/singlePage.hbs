@@ -320,14 +320,34 @@
                 <div class="col-lg-4">
                  <!-- Ads Start -->
                     <div class="mb-3">
-                        <div class="section-title mb-0">
+              
+                        {{!-- <div class="section-title mb-0">
                             <h4 class="m-0 text-uppercase font-weight-bold">Advertisement</h4>
-                        </div>
+                        </div> --}}
                         <div class="bg-white text-center border border-top-0 p-3">
+                             <div class="bg-white border border-top-0 p-3 d-none d-md-block">
+               {{#if addNumberOne}}
+                 <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{addNumberOne.image1}}" alt="Advertisement" class="img-fluid " style="object-fit: cover;"> 
+               {{else}}
+            <div style="border: solid 1px red;">
+              <h4>To publish adds contact idondusuddi@gmail.com</h4> 
+            </div>
+                 {{/if}}
+                 </div>
                             {{!-- <a href=""><img class="img-fluid" src="img/news-800x500-2.jpg" alt=""></a> --}}
-                            <div style="border: solid 1px red;"> 
-                                <h1>Market your buisiness here</h1>
-                            </div>
+                           {{#if allAdds.length}}
+            {{#each allAdds}}
+            <div class="m-2" style="border: solid 1px rgb(194, 243, 255);">
+                               <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{this.image1}}" alt="Advertisement" class="img-fluid " style="object-fit: cover;"> 
+
+            </div>
+            {{/each}}
+            {{else}}
+            <div style="border: solid 1px red;">
+              <h4>To publish adds contact idondusuddi@gmail.com</h4> 
+            </div>
+            {{/if}}
+
                         </div>
                     </div>
                     <!-- Ads End -->

@@ -1,6 +1,6 @@
 import express from "express"
 import {addCategory, addNews, getCategory,adminRegister,adminLogin,
-  getAdmin,getadminLogin,adminLogout,viewNews,editNews,updateNews} from "../controllers/AdminController.js"
+  getAdmin,getadminLogin,adminLogout,viewNews,editNews,updateNews, getAdvertisement, postAdvertisement, viewAdds} from "../controllers/AdminController.js"
 
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v2 as cloudinary } from 'cloudinary';
@@ -30,34 +30,34 @@ cloudinary.config({
 //     },
 //   });
 
-const storage = new CloudinaryStorage({
-// const storage = ({
+const createUploadMiddleware = (folder) => {
+  const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-      folder: 'news', // Set your desired folder in Cloudinary
+      folder: folder,
       allowed_formats: ['jpg', 'jpeg', 'png'],
-       // Add compression settings
-    transformation: [
-      { width: 1000, height: 1000, crop: 'limit' }, // Example: Resize to maximum 1000x1000
-      { quality: 'auto', fetch_format: 'auto' } // Enable automatic quality and format optimization
-    ],
-      // You can add more Cloudinary parameters as needed
+      transformation: [
+        { width: 1000, height: 1000, crop: 'limit' },
+        { quality: 'auto', fetch_format: 'auto' }
+      ],
     },
   });
-  
+
   const upload = multer({
     storage: storage,
     limits: {
-      fileSize: 1024 * 1024 * 5, // 5MB limit (adjust as needed)
+      fileSize: 1024 * 1024 * 5, // 5MB limit
     },
   });
-  const multipleupload=upload.fields([{name:'image1'},{name:"image2"},{name:"images",maxCount:5}])
+
+  return upload.fields([{name:'image1'},{name:"image2"},{name:"images",maxCount:5}]);
+};
  
 router.get('/',authMiddleware,getadminLogin)
 router.post('/',adminLogin)
 router.get('/admin-news',authMiddleware,getAdmin)
 // router.get('/admin-news',authMiddleware,getAdmin)
-router.post('/admin-addnews',authMiddleware,multipleupload,addNews)
+router.post('/admin-addnews',authMiddleware,createUploadMiddleware('news'),addNews)
 // router.post('/addarticles',upload.array('images', 5),addArticles)
 // router.get('/',getNews)
 // router.get('/article',getArticles)
@@ -68,7 +68,11 @@ router.get('/categories',authMiddleware,getCategory)
 
 router.get('/viewnewsList',authMiddleware,viewNews)
 router.get('/editNews/:id',authMiddleware,editNews)
-router.post('/updateNews/:id',authMiddleware,multipleupload,updateNews)
+router.post('/updateNews/:id',authMiddleware, createUploadMiddleware('news'),updateNews)
+
+router.get('/advertisement',authMiddleware,getAdvertisement)
+router.post('/add-advertisement',authMiddleware,createUploadMiddleware('advertisements'),postAdvertisement)
+router.get('/viewAdds',authMiddleware,viewAdds)
 
 router.post('/register',adminRegister)
 router.post('/login',adminLogin)
