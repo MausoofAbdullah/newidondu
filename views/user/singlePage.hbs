@@ -279,12 +279,12 @@
                         <!-- Previous News -->
                         <div class="col-6">
                             <a href="/detailnews/{{previousNews.slug}}">
-                             <h4 class="m-0 text-uppercase font-weight-bold">previous news</h4>
+                             <h4 class="m-0 text-uppercase font-weight-bold text-warning">previous news</h4>
                                 <div class="d-flex align-items-center bg-white mb-3" style="height: 150px;">
-                                    <img class="img-fluid" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{previousNews.image1 }}" alt="" style="height: 90px;width:90px;" >
+                                    {{!-- <img class="img-fluid" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{previousNews.image1 }}" alt="" style="height: 90px;width:90px;" > --}}
                                     <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                       
-                                        <a href="/detailnews/{{previousNews.slug}}" class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">{{previousNews.shortp}}</a>
+                                        <a href="/detailnews/{{previousNews.slug}}" class="h6 m-0 text-secondary text-uppercase font-weight-bold text-danger" href="">{{previousNews.shortp}}</a>
                                     </div>
                                 </div>
                             </a>
@@ -294,11 +294,11 @@
                    <div class="col-6">
     {{#if nextNews}}
         <a href="/detailnews/{{nextNews.slug}}">
-            <h4 class="m-0 text-uppercase font-weight-bold">Next news</h4>
+            <h4 class="m-0 text-uppercase font-weight-bold text-warning ">Next news</h4>
             <div class="d-flex align-items-center bg-white mb-3" style="height: 150px;">
-                <img class="img-fluid" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{nextNews.image1}}" alt="" style="height: 90px;width:90px;" >
+                {{!-- <img class="img-fluid" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{nextNews.image1}}" alt="" style="height: 90px;width:90px;" > --}}
                 <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                    <a href="/detailnews/{{nextNews.slug}}" class="h6 m-0 text-secondary text-uppercase font-weight-bold">{{nextNews.shortp}}</a>
+                    <a href="/detailnews/{{nextNews.slug}}" class="h6 m-0 text-secondary text-uppercase font-weight-bold text-danger">{{nextNews.shortp}}</a>
                 </div>
             </div>
         </a>
@@ -357,38 +357,11 @@
                         <div class="section-title mb-0">
                             <h4 class="m-0 text-uppercase font-weight-bold">Trending News</h4>
                         </div>
-                        <div class="bg-white border border-top-0 p-3">
-                          {{#each trendingNews}}
-                          <a href="/detailnews/{{this.slug}}">
 
-                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                <img class="img-fluid" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{this.image1}}" alt="" style="height: 90px;width:130px;" >
-                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                    <div class="mb-2">
-                                        
-                                       
-                                    </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="/detailnews/{{this.slug}}">{{this.shortp}}<span style="font-size: smaller;color:#39569E;padding-left:5px">click to read more...</span>.</a>
-                                </div>
-                            </div>
-                          </a>
-                            {{/each}}
-                            <div class="d-flex justify-content-between mt-3">
-              {{#if (gt trendingPage 1)}}
+        <div class="bg-white border border-top-0 p-3" >
 
-                <a
-                  href="?trendingPage={{previousPage}}"
-                  class="btn btn-primary"
-                >Previous</a>
-              {{/if}}
-
-              {{#if (lt trendingPage trendingTotalPages)}}
-                <a
-                  href="?trendingPage={{nextPage}}"
-                  class="btn btn-primary"
-                >Next</a>
-              {{/if}}
-            </div>
+                       {{>trendingNews}}
+        </div>
                        
                         </div>
                     </div>
@@ -491,10 +464,12 @@
   
 
   function shareOnWhatsApp(title, image, newsId) {
+    console.log(title,image,newsId)
     console.log("clicked")
  
     
       const baseUrl = window.location.origin; 
+      console.log(baseUrl,"base")
             const message = `${title}\n\n » idondusuddi \n\n${baseUrl}/detailnews/${newsId}`;
             
                 const encodedMessage = encodeURIComponent(message);

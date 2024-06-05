@@ -88,9 +88,11 @@ function truncateToThreeWords(str) {
 const previousPage = Math.max(1, page - 1);
 const nextPage = Math.max(1, page + 1);
 
-    // Pagination for trending news
+//     // Pagination for trending news
+console.log(req.query,"in hoe")
     const trendingPerPage = 8; // Set the number of trending news items per page
-    const trendingPage = req.query.trendingPage || 1;
+    const trendingPage = req.query.page || 1;
+    console.log(trendingPage,"page")
 
     const trendingNews = await NewsModel.find()
         .sort({ createdAt: -1 })
@@ -100,6 +102,7 @@ const nextPage = Math.max(1, page + 1);
 
     const trendingTotalCount = await NewsModel.countDocuments();
     const trendingTotalPages = Math.ceil(trendingTotalCount / trendingPerPage);
+    console.log(trendingTotalPages,'tot')
 
 
     const previousNews = await NewsModel.findOne({ createdAt: { $lt: news.createdAt } }).sort({ createdAt: -1 }).exec() ||await NewsModel.findOne().sort({ createdAt: -1 }).exec();
@@ -112,7 +115,7 @@ const nextPage = Math.max(1, page + 1);
     const addNumberOne = allAdds.find(add => add.addnumber === 1);
     const filteredAdds = allAdds.filter(add => add.addnumber !== 1);
 
-        res.render('user/newsHome',{news,allnews,previousNews,nextNews,category,totalPages, page ,previousPage,nextPage, trendingNews, trendingTotalPages, trendingPage,currentPath,currentDate,allAdds:filteredAdds,addNumberOne})
+        res.render('user/newsHome',{news,allnews,category,previousPage:null,trendingPage,trendingTotalPages,totalPages:null,nextPage:2,trendingNews,previousNews,nextNews, page ,currentPath,currentDate,allAdds:filteredAdds,addNumberOne})
         
       //  return res.status(200).json(news)
     } catch (error) {
@@ -260,6 +263,7 @@ console.log(nextPage,"nexxxxxxxxt")
        trendingNews.forEach(newsItem => {
         newsItem.shortp = truncateToWords(newsItem.title);
       });
+      
    const trendingTotalCount = await NewsModel.countDocuments();
    const trendingTotalPages = Math.ceil(trendingTotalCount / trendingPerPage);
    const allnews=await NewsModel.find().sort({ createdAt: -1 }).limit().exec()
@@ -384,4 +388,45 @@ export const getContactpage=async(req,res,next)=>{
     next(error)
   }
 }
+
+
+
+// In your controller file (e.g., controllers/newsController.js)
+export const getTrendingNews = async (req, res, next) => {
+  console.log("so")
+  
+  try {
+    const trendingPage = parseInt(req.query.page) || 1;
+    console.log(trendingPage,"tr")
+    const trendingPerPage = 8;
+
+    const trendingNews = await NewsModel.find()
+      .sort({ createdAt: -1 })
+      .skip((trendingPage - 1) * trendingPerPage)
+      .limit(trendingPerPage)
+      .exec();
+      
+
+    trendingNews.forEach(newsItem => {
+      newsItem.shortp = truncateBody(newsItem.title);
+    });
+
+    const trendingTotalCount = await NewsModel.countDocuments();
+    const trendingTotalPages = Math.ceil(trendingTotalCount / trendingPerPage);
+
+    res.json({
+      trendingNews,
+      trendingTotalPages,
+      trendingPage,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+const truncateBody = (str) => {
+  return str ? str.slice(0, 80) : '';
+};
+
 
