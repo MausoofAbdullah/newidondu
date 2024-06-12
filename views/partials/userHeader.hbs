@@ -82,23 +82,27 @@
                 <div class="text-center d-block d-lg-none" style="border: solid 1px yellow;">
               <h4 class="text-danger">To publish Adds and news contact idondusuddi@gmail.com</h4>
             </div>
+            {{#unless isdetailnews}}
         {{#if addNumberOne}}
         <div class="d-block d-lg-none p-1 m-1" style="border: solid 1px rgb(159, 189, 186)">
 
                  <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{addNumberOne.image1}}" alt="Advertisement" class="img-fluid d-block d-lg-none" style="object-fit: cover;"> 
         </div>
                  {{/if}}
+        {{/unless}}
                 <div class="navbar-nav mr-auto py-0">
                     <a href="/" class="nav-item nav-link ">Home</a>
-                    <a href="/category?category=sports" class="nav-item nav-link">ಕ್ರೀಡೆ</a>
                     <a href="/category?category=politics" class="nav-item nav-link">ರಾಜಕೀಯ</a>
                     <a href="/category?category=religious" class="nav-item nav-link">ಧಾರ್ಮಿಕ</a>
+                    {{#unless isdetailnews}}
+                    <a href="/category?category=sports" class="nav-item nav-link">ಕ್ರೀಡೆ</a>
                     <a href="/category?category=current" class="nav-item nav-link">ಪ್ರಚಲಿತ</a>
                     <a href="/category?category=international" class="nav-item nav-link">ವಿದೇಶ</a>
                     <a href="/category?category=interstate" class="nav-item nav-link">
 ಅಂತಾರಾಜ್ಯ</a>
                     <a href="/category?category=special" class="nav-item nav-link">ವಿಶೇಷ </a>
                     <a href="/category?category=education" class="nav-item nav-link">ಶೈಕ್ಷಣಿಕ  </a>
+                    {{/unless}}
                     <a href="/login" class="nav-item nav-link">Login</a>
                     <a href="/contact" class="nav-item nav-link">contactus </a>
                     {{!-- <div class="nav-item dropdown">

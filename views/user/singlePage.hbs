@@ -17,10 +17,11 @@
      crossorigin="anonymous"></script> --}}
 </head>
     <!-- Breaking News Start -->
-    <div class="container-fluid mt-5 mb-3 pt-3">
+    <div class="container-fluid mt-1 mb-3 pt-3" 
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
+              
                     <div class="d-flex justify-content-between">
                         <div class="section-title border-right-0 mb-0" style="width: 140px;">
                             <h5 class="m-0 text-uppercase font-weight-bold" style="color: red; animation: blink 1s infinite;">Breaking</h5>
@@ -66,7 +67,14 @@
                                 <a class="text-body" href="">{{resultDate}}.</a>
                             </div>
                             <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{news.title}}</h1>
-                            <p id="newsBody" class="preserve-line-breaks">{{news.body}}.<br> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
+                            <p id="newsBody" class="preserve-line-breaks">{{news.body}}.<br> 
+                            {{#if addNumberOne}}
+        <div class="d-block d-lg-none p-1 m-1" style="border: solid 1px rgb(159, 189, 186)">
+
+                 <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{addNumberOne.image1}}" alt="Advertisement" class="img-fluid d-block d-lg-none" style="object-fit: cover;"> 
+        </div>
+                 {{/if}}
+                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -87,9 +95,11 @@
                             <div class="class">
                                 
                             </div>
+                            {{#if news.image2}}
                              <a href="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{news.image2}}" data-fancybox="gallery">
                             <img class="img-fluid w-50 float-left mr-4 mb-2" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{news.image2}}" alt="image" >
                             </a>
+                            {{/if}}
                         
                            
                             <p class="">{{news.secondparagraph}}</p>

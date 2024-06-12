@@ -276,7 +276,7 @@ console.log(nextPage,"nexxxxxxxxt")
   const filteredAdds = allAdds.filter(add => add.addnumber !== 1);
 
    
-        res.render('user/singlePage',{user:true,addNumberOne,allAdds:filteredAdds,news,img,resultDate,previousNews,nextNews,currentDate,allnews, trendingNews, trendingTotalPages, trendingPage,previousPage,nextPage})
+        res.render('user/singlePage',{user:true,isdetailnews:true,addNumberOne,allAdds:filteredAdds,news,img,resultDate,previousNews,nextNews,currentDate,allnews, trendingNews, trendingTotalPages, trendingPage,previousPage,nextPage})
 
         // return res.status(200).json(news);
       } catch (error) {
