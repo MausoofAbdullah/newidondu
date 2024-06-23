@@ -1,6 +1,7 @@
 import express from "express"
 import {getNews,getDetailnews,getCategorynews,getContactpage , getTrendingNews} from "../controllers/newsController.js"
 import cacheMiddleware from "../middleware/cacheMiddleware.js"
+import NewsModel from "../models/newsModel.js"
 
 const router=express.Router()
 
@@ -19,6 +20,7 @@ router.get('/contact',getContactpage)
 
 
 router.get('/trending-news', getTrendingNews);
+
 
 
 export default router

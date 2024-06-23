@@ -115,7 +115,7 @@ export const addNews= async(req,res,next)=>{
     const articleNumber = totalCount + 101;
  
   // (req.body,"req")
-    const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph,isBreaking} = req.body;
+    const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph,isBreaking,twitterLink} = req.body;
     
     const dateString = date
     
@@ -148,7 +148,8 @@ console.log(slug,"sssssss")
       secondparagraph,
       thirdparagraph,
       slug,
-      isBreaking
+      isBreaking,
+      twitterLink
     });
 
     try {
@@ -304,6 +305,43 @@ export const updateNews=async(req,res,next)=>{
   } catch (error) {
     next(error)
     
+  }
+}
+
+
+export const blockNews=async(req,res)=>{
+  console.log("odf")
+  try {
+    const newsId=req.params.id
+    console.log(newsId,"id")
+
+    
+    console.log(req.body,"blicing")
+    await NewsModel.updateOne({_id:newsId},
+    {
+      $set:{
+        isActive:false
+      }
+    })
+    res.redirect('/admin/viewnewsList')
+  } catch (error) {
+    next(error)
+  }
+}
+export const unblockNews=async(req,res)=>{
+  try {
+    const newsId=req.params.id
+    
+    console.log(req.body,"unblicing")
+    await NewsModel.updateOne({_id:newsId},
+    {
+      $set:{
+        isActive:true
+      }
+    })
+    res.redirect('/admin/viewnewsList')
+  } catch (error) {
+    next(error)
   }
 }
 

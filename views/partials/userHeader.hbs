@@ -76,7 +76,7 @@
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3 show" id="navbarCollapse">
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3 {{#unless isdetailnews}} show{{/unless}}" id="navbarCollapse">
                  
                 {{!-- <a href="https://htmlcodex.com"><img class="img-fluid" src="img/ads-728x90.png" alt=""></a> --}}
                 <div class="text-center d-block d-lg-none" style="border: solid 1px yellow;">
@@ -92,9 +92,9 @@
         {{/unless}}
                 <div class="navbar-nav mr-auto py-0">
                     <a href="/" class="nav-item nav-link ">Home</a>
+                    
                     <a href="/category?category=politics" class="nav-item nav-link">ರಾಜಕೀಯ</a>
                     <a href="/category?category=religious" class="nav-item nav-link">ಧಾರ್ಮಿಕ</a>
-                    {{#unless isdetailnews}}
                     <a href="/category?category=sports" class="nav-item nav-link">ಕ್ರೀಡೆ</a>
                     <a href="/category?category=current" class="nav-item nav-link">ಪ್ರಚಲಿತ</a>
                     <a href="/category?category=international" class="nav-item nav-link">ವಿದೇಶ</a>
@@ -102,9 +102,9 @@
 ಅಂತಾರಾಜ್ಯ</a>
                     <a href="/category?category=special" class="nav-item nav-link">ವಿಶೇಷ </a>
                     <a href="/category?category=education" class="nav-item nav-link">ಶೈಕ್ಷಣಿಕ  </a>
-                    {{/unless}}
                     <a href="/login" class="nav-item nav-link">Login</a>
                     <a href="/contact" class="nav-item nav-link">contactus </a>
+                   
                     {{!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
                         <div class="dropdown-menu rounded-0 m-0">

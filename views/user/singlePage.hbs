@@ -60,13 +60,24 @@
                          <a href="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{news.image1}}" data-fancybox="gallery">
                         <img class="img-fluid w-100 h-100 mb-2" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{news.image1}}" style="object-fit: cover;">
                         </a>
-                    <div class="bg-white border border-top-0 p-4">
+                    <div class="bg-white border border-top-0 p-4" >
                             <div class="mb-3">
                                 <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
                                     href="">{{news.category}}</a>
                                 <a class="text-body" href="">{{resultDate}}.</a>
                             </div>
                             <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{news.title}}</h1>
+                            <p>                  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1728528418343509"
+     data-ad-slot="1701824162"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
                             <p id="newsBody" class="preserve-line-breaks">{{news.body}}.<br> 
                             {{#if addNumberOne}}
         <div class="d-block d-lg-none p-1 m-1" style="border: solid 1px rgb(159, 189, 186)">
@@ -74,6 +85,7 @@
                  <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{addNumberOne.image1}}" alt="Advertisement" class="img-fluid d-block d-lg-none" style="object-fit: cover;"> 
         </div>
                  {{/if}}
+  
                   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
@@ -103,12 +115,28 @@
                         
                            
                             <p class="">{{news.secondparagraph}}</p>
+
+                            {{#if news.twitterLink}}
+{{!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> --}}
+
+<blockquote class="twitter-tweet" id="news-container"> 
+  <a href="{{news.twitterLink}}"></a>
+</blockquote> 
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  {{/if}}
+
+  
                             {{!-- <h5 class="text-uppercase font-weight-bold mb-3">Lorem ipsum dolor sit amet elit</h5> --}}
                         <a href="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{news.image1}}" data-fancybox="gallery">
                              <img class="img-fluid w-100 h-100 mb-2" src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{news.image1}}" style="object-fit: cover;" alt="image">
                         </a>
                        <h5 class="font-weight-bold">{{news.imagetitle1}}</h5>
                             <p>{{news.thirdparagraph}}</p>
+
+                                          
+  
+  
                              <h4 class="mt-5">ಇತರ ಚಿತ್ರಗಳು </h4>
                             {{#each img}}
              <a href="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{this}}" data-fancybox="gallery">
@@ -457,6 +485,9 @@
                      </div>
 
                      <script>
+
+                  
+
                           function shareOnFacebook(title, image, newsId)  {
   
     // Implement logic to open Facebook share dialog with shareLink
@@ -480,7 +511,7 @@
     
       const baseUrl = window.location.origin; 
       console.log(baseUrl,"base")
-            const message = `${title}\n\n » idondusuddi \n\n${baseUrl}/detailnews/${newsId}`;
+            const message = `*${title}*\n\n » idondusuddi \n\n *ಇದೊಂದುಸುದ್ದಿ* \n idondusuddi@gmail.com\n\n${baseUrl}/detailnews/${newsId}`;
             
                 const encodedMessage = encodeURIComponent(message);
     /*const encodedTitle = encodeURIComponent(title);
@@ -492,6 +523,7 @@
     window.open(whatsappLink, '_blank');
 
   }
+
 
 
 </script>

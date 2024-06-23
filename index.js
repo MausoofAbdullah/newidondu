@@ -77,6 +77,8 @@ add: function (a, b) {
   return a + b;
 },    eq: function (a, b) {
   return a === b;
+}, encodeURIComponent: function(url) {
+  return encodeURIComponent(url);
 }},
 extname:'hbs',defaultLayout:'userLayout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/',
  runtimeOptions: { allowProtoPropertiesByDefault: true, allowProtoMethodsByDefault: true,},}));

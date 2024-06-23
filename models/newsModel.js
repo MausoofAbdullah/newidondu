@@ -15,6 +15,10 @@ const newsSchema=mongoose.Schema(
             type:Boolean,
             default:false
         },
+        isActive:{
+            type:Boolean,
+            default:true
+        },
         subtitle:String,
         category:String,
         image1:String,
@@ -46,7 +50,11 @@ const newsSchema=mongoose.Schema(
             type:String,
             required:true,
             unique:true
-          }
+          },
+          twitterLink: {
+            type: String,
+            required: false // This field is not mandatory
+        }
 
    
     },

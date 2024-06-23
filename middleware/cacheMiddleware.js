@@ -51,7 +51,7 @@ const cacheMiddleware = (req, res, next) => {
 };
 
 // Function to increment the view count
-const incrementViewCount = async (slug) => {
+const incrementViewCount = async (slug) => { 
   const news = await NewsModel.findOne({ slug });
   if (news) {
     news.views += 1;

@@ -28,8 +28,8 @@ export const getNews=async(req,res,next)=>{
         // throw new Error("Something went wrong!");
       const perPage = 9;
       const page = req.query.page || 1;
-        const news=await NewsModel.find().sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
-        const allnews=await NewsModel.find().sort({ createdAt: -1 }).limit(10).exec()
+        const news=await NewsModel.find({ isActive: { $ne: false } }).sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
+        const allnews=await NewsModel.find({ isActive: { $ne: false } }).sort({ createdAt: -1 }).limit(10).exec()
 
         const category = await categoryModel.find().exec()
         
@@ -94,7 +94,7 @@ console.log(req.query,"in hoe")
     const trendingPage = req.query.page || 1;
     console.log(trendingPage,"page")
 
-    const trendingNews = await NewsModel.find()
+    const trendingNews = await NewsModel.find({ isActive: { $ne: false } })
         .sort({ createdAt: -1 })
         .skip((trendingPage - 1) * trendingPerPage)
         .limit(trendingPerPage)
@@ -105,11 +105,11 @@ console.log(req.query,"in hoe")
     console.log(trendingTotalPages,'tot')
 
 
-    const previousNews = await NewsModel.findOne({ createdAt: { $lt: news.createdAt } }).sort({ createdAt: -1 }).exec() ||await NewsModel.findOne().sort({ createdAt: -1 }).exec();
+    const previousNews = await NewsModel.findOne({ createdAt: { $lt: news.createdAt }, isActive: { $ne: false } }).sort({ createdAt: -1 }).exec() ||await NewsModel.findOne({ isActive: { $ne: false }}).sort({ createdAt: -1 }).exec();
       
 
     // Get the next news
-    const nextNews = await NewsModel.findOne({ createdAt: { $gt: news.createdAt } }).sort({ createdAt: 1 }).exec() || await NewsModel.findOne().sort({ createdAt: 1 }).exec();
+    const nextNews = await NewsModel.findOne({ createdAt: { $gt: news.createdAt }, isActive: { $ne: false } }).sort({ createdAt: 1 }).exec() || await NewsModel.findOne({ isActive: { $ne: false }}).sort({ createdAt: 1 }).exec();
 
     const allAdds=await addModel.find().sort({ createdAt: 1 }).exec()
     const addNumberOne = allAdds.find(add => add.addnumber === 1);
@@ -146,7 +146,8 @@ export const getDetailnews=async(req,res,next)=>{
        
         
         // console.log(id,"id")
-        const news = await NewsModel.findOne({slug:slug});
+        const news = await NewsModel.findOne({slug:slug,isActive: { $ne: false }});
+      
       //   if (news) {
       //     news.views += 1; // Increment the view count
       //     await news.save(); // Save the updated news article with the incremented view count
@@ -217,13 +218,13 @@ const resultDate = `${monthName} ${dayOfMonth} ${dayOfWeek} ${fullYear}`;
         // }
         
     
-        const previousNews = await NewsModel.findOne({ createdAt: { $lt: news.createdAt } }).sort({ createdAt: -1 }).exec() ||await NewsModel.findOne().sort({ createdAt: -1 }).exec();
+        const previousNews = await NewsModel.findOne({ createdAt: { $lt: news.createdAt }, isActive: { $ne: false } }).sort({ createdAt: -1 }).exec() ||await NewsModel.findOne().sort({ createdAt: -1 }).exec();
         previousNews.shortp = truncateToWords(previousNews.title);
         
 
 
         // Get the next news
-        const nextNews = await NewsModel.findOne({ createdAt: { $gt: news.createdAt } }).sort({ createdAt: 1 }).exec() 
+        const nextNews = await NewsModel.findOne({ createdAt: { $gt: news.createdAt }, isActive: { $ne: false } }).sort({ createdAt: 1 }).exec() 
     
       
       const img=news?.images
@@ -255,7 +256,7 @@ console.log(nextPage,"nexxxxxxxxt")
    const trendingPerPage = 8; // Set the number of trending news items per page
    const trendingPage = req.query.trendingPage || 1;
 
-   const trendingNews = await NewsModel.find()
+   const trendingNews = await NewsModel.find({ isActive: { $ne: false }})
        .sort({ createdAt: -1 })
        .skip((trendingPage - 1) * trendingPerPage)
        .limit(trendingPerPage)
@@ -266,7 +267,7 @@ console.log(nextPage,"nexxxxxxxxt")
       
    const trendingTotalCount = await NewsModel.countDocuments();
    const trendingTotalPages = Math.ceil(trendingTotalCount / trendingPerPage);
-   const allnews=await NewsModel.find().sort({ createdAt: -1 }).limit().exec()
+   const allnews=await NewsModel.find({ isActive: { $ne: false } }).sort({ createdAt: -1 }).limit().exec()
    allnews.forEach(newsItem => {
     newsItem.shortp = truncateToWords(newsItem.title);
   });
@@ -305,11 +306,11 @@ export const getCategorynews=async(req,res,next)=>{
         const currentPath = req.path;
         const perPage = 9;
         const page = req.query.page || 1;
-          const cnews=await NewsModel.find({ category }).sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
+          const cnews=await NewsModel.find({ category,isActive: { $ne: false } }).sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
         
           
           
-        const news=await NewsModel.find().sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
+        const news=await NewsModel.find({ isActive: { $ne: false } }).sort({ createdAt: -1 }).skip((page - 1) * perPage) .limit(perPage).exec()
          
           const showCategory= await categoryModel.find().exec()
           
@@ -355,7 +356,7 @@ export const getCategorynews=async(req,res,next)=>{
       const trendingPerPage = 9; // Set the number of trending news items per page
       const trendingPage = req.query.trendingPage || 1;
   
-      const trendingNews = await NewsModel.find()
+      const trendingNews = await NewsModel.find({ isActive: { $ne: false } })
           .sort({ createdAt: -1 })
           .skip((trendingPage - 1) * trendingPerPage)
           .limit(trendingPerPage)
@@ -400,7 +401,7 @@ export const getTrendingNews = async (req, res, next) => {
     console.log(trendingPage,"tr")
     const trendingPerPage = 8;
 
-    const trendingNews = await NewsModel.find()
+    const trendingNews = await NewsModel.find({ isActive: { $ne: false } })
       .sort({ createdAt: -1 })
       .skip((trendingPage - 1) * trendingPerPage)
       .limit(trendingPerPage)
