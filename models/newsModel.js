@@ -54,6 +54,10 @@ const newsSchema=mongoose.Schema(
           twitterLink: {
             type: String,
             required: false // This field is not mandatory
+        },
+        videoID:{
+            type:String,
+            required:false
         }
 
    

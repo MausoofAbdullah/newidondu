@@ -114,9 +114,11 @@ export const addNews= async(req,res,next)=>{
     // Increment the count by one to get the next article number
     const articleNumber = totalCount + 101;
  
-  // (req.body,"req")
-    const { _id,title,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph,isBreaking,twitterLink} = req.body;
-    
+ 
+    const { _id,title,url,subtitle, category, date, body ,imagetitle1,imagetitle2,secondparagraph,thirdparagraph,isBreaking,twitterLink} = req.body;
+   console.log(twitterLink,"url")
+    const videoID = getYouTubeVideoID(url);
+  
     const dateString = date
     
   const dateObject = new Date(dateString);
@@ -136,6 +138,7 @@ console.log(slug,"sssssss")
     // Create a new NewsModel instance with the extracted data
     const newNews = new NewsModel({
       title,
+      videoID,
       subtitle,
       category,
       date:formattedDate,
@@ -415,4 +418,8 @@ export const viewAdds=async(req,res,next)=>{
 
 //creating a function to return the html based on the route
 
-
+function getYouTubeVideoID(url) {
+  const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const matches = url.match(regex);
+  return matches ? matches[1] : null;
+}

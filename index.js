@@ -57,6 +57,7 @@ handlebars.registerHelper('isSecondImage', function(index, options) {
   return index === 1 ? options.fn(this) : options.inverse(this);
 });
 
+
 // import dotenv from "dotenv";
 import cors from "cors" 
 // import AuthRoute from "./Routes/Auth.js"

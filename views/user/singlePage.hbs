@@ -78,8 +78,8 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script></p>
-                            <p id="newsBody" class="preserve-line-breaks">{{news.body}}.<br> 
-                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
+                            <p id="newsBody" class="preserve-line-breaks"></p><br>
+                               <p> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1728528418343509"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -96,9 +96,9 @@
                  <img src="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{addNumberOne.image1}}" alt="Advertisement" class="img-fluid d-block d-lg-none" style="object-fit: cover;"> 
         </div>
                  {{/if}}
+                            </p>
   
         
-                            </p>
                            
                         
                             {{!-- <h3 class="text-uppercase font-weight-bold mb-3">Lorem ipsum dolor sit amet elit</h3> --}}
@@ -120,13 +120,18 @@
                             {{#if news.twitterLink}}
 {{!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> --}}
 
-<blockquote class="twitter-tweet" id="news-container"> 
-  <a href="{{news.twitterLink}}"></a>
-</blockquote> 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+   <div class="embed-responsive embed-responsive-16by9">
+        {{{news.twitterLink}}}
+    </div>
 
   {{/if}}
+  {{#if news.videoID}}
+  <div class="embed-responsive embed-responsive-16by9">
 
+   
+  <iframe  class="embed-responsive-item" src="https://www.youtube.com/embed/_6EUBAYSMM0" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+{{/if}}
   
                             {{!-- <h5 class="text-uppercase font-weight-bold mb-3">Lorem ipsum dolor sit amet elit</h5> --}}
                         <a href="https://res.cloudinary.com/dkeb469sv/image/upload/v1703658754/{{news.image1}}" data-fancybox="gallery">
@@ -487,7 +492,33 @@
 
                      <script>
 
-                  
+            function parseTextWithLinks(text) {
+    text =text.replace(/(\b(?:(?:https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, function(match) {
+        if (match.startsWith('www.')) {
+            return '<a href="http://' + match + '" target="_blank">' + match + '</a>';
+        } else {
+            return '<a href="' + match + '" target="_blank">' + match + '</a>';
+        }
+
+    });
+    
+text = text.replace(/\*(.*?)\*/g, '<strong>$1</strong>');
+ return text
+}
+
+        // Get the news body from the server and display it
+        window.addEventListener('DOMContentLoaded', function () {
+            // Simulate getting news body data from the server
+            console.log('some')
+              const newsBodyData = `{{ news.body }}`;
+   
+            // Parse the news body text to convert URLs into clickable links
+            const parsedNewsBody = parseTextWithLinks(newsBodyData);
+            console.log(parsedNewsBody,"pusr")
+       
+            // Display the parsed news body in the HTML
+            document.getElementById('newsBody').innerHTML = parsedNewsBody;
+        });
 
                           function shareOnFacebook(title, image, newsId)  {
   
@@ -525,7 +556,8 @@
 
   }
 
-
+  
+ 
 
 </script>
                   
